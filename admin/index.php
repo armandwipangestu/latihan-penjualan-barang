@@ -25,6 +25,9 @@ if (!isset($_SESSION['login'])) {
 
     <!-- Memanggil FontAwesome V.6.3.0 -->
     <link rel="stylesheet" href="<?= baseUrl(); ?>assets/vendor/fontawesome/css/all.min.css">
+
+    <!-- Memanggil Sweetalert -->
+    <link rel="stylesheet" href="<?= baseUrl(); ?>assets/vendor/sweetalert/css/sweetalert2.min.css">
 </head>
 
 <body>
@@ -64,6 +67,11 @@ if (!isset($_SESSION['login'])) {
                     <a href="<?= baseUrl() ?>admin/pembayaran" class="nav-link">
                         <i class="fa-solid fa-cart-shopping me-1"></i>
                         Pembayaran
+                    </a>
+
+                    <a href="#" data-id="<?= $_SESSION['id'] ?>" data-url="<?= baseUrl() ?>admin/auth" class="btn btn-dark keluar">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Keluar
                     </a>
                 </ul>
             </div>
@@ -164,96 +172,32 @@ if (!isset($_SESSION['login'])) {
         </div>
     </div>
 
-    <!-- Start Panel -->
-    <!-- <div class="container mt-5 mb-5">
-        <div class="row">
-
-            <div class="col-md-5 bg-success text-white p-4 rounded m-auto mt-4">
-                <h4>
-                    <i class="fa-solid fa-money-bill me-1"></i>
-                    Transaksi
-                </h4>
-                <p class="text-white">
-                    Membuat, Mengubah dan Menghapus Transaksi
-                </p>
-                <div class="d-flex justify-content-end">
-                    <a href="<?= baseUrl() ?>admin/transaksi" class="btn btn-dark">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        Lihat Transaksi
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-5 bg-primary text-white p-4 rounded m-auto mt-4">
-                <h4>
-                    <i class="fa-solid fa-boxes-packing me-1"></i>
-                    Supplier
-                </h4>
-                <p class="text-white">
-                    Membuat, Mengubah dan Menghapus Supplier
-                </p>
-                <div class="d-flex justify-content-end">
-                    <a href="<?= baseUrl() ?>admin/supplier" class="btn btn-dark">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        Lihat Supplier
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-5 bg-warning text-white p-4 rounded m-auto mt-4">
-                <h4>
-                    <i class="fa-solid fa-cubes me-1"></i>
-                    Barang
-                </h4>
-                <p class="text-white">
-                    Membuat, Mengubah dan Menghapus Barang
-                </p>
-                <div class="d-flex justify-content-end">
-                    <a href="<?= baseUrl() ?>admin/barang" class="btn btn-dark">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        Lihat Barang
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-5 bg-danger text-white p-4 rounded m-auto mt-4">
-                <h4>
-                    <i class="fa-solid fa-users me-1"></i>
-                    Pembeli
-                </h4>
-                <p class="text-white">
-                    Membuat, Mengubah dan Menghapus Pembeli
-                </p>
-                <div class="d-flex justify-content-end">
-                    <a href="<?= baseUrl() ?>admin/pembeli" class="btn btn-dark">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        Lihat Pembeli
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-5 bg-info text-white p-4 rounded m-auto mt-4">
-                <h4>
-                    <i class="fa-solid fa-cart-shopping me-1"></i>
-                    Pembayaran
-                </h4>
-                <p class="text-white">
-                    Membuat, Mengubah dan Menghapus Pembayaran
-                </p>
-                <div class="d-flex justify-content-end">
-                    <a href="<?= baseUrl() ?>admin/pembayaran" class="btn btn-dark">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        Lihat Pembayaran
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </div> -->
-    <!-- End Panel -->
-
     <!-- Memanggil JS Bootstrap V.5.3.0 -->
     <script src="<?= baseUrl(); ?>assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <!-- Memanggil JS Sweetalert -->
+    <script src="<?= baseUrl(); ?>assets/vendor/sweetalert/js/sweetalert2.all.min.js"></script>
+
+    <script>
+        const keluar = document.querySelector('.keluar');
+        keluar.addEventListener('click', () => {
+            const dataid = keluar.dataset.id
+            const data_base_url = keluar.dataset.url;
+            Swal.fire({
+                icon: 'warning',
+                title: 'Apakah anda yakin ingin keluar',
+                showCancelButton: true,
+                confirmButtonColor: '#d9534f',
+                cancelButtonColor: '#5cb85c',
+                confirmButtonText: `Ya`,
+                cancelButtonText: `Tidak`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.href = `${data_base_url}/keluar.php?id=${dataid}`
+                }
+            })
+        })
+    </script>
 
 </body>
 

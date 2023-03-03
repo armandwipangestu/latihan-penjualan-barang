@@ -78,6 +78,11 @@ $datas = mysqli_query($conn, $query);
                         <i class="fa-solid fa-cart-shopping me-1"></i>
                         Pembayaran
                     </a>
+
+                    <a href="#" data-id="<?= $_SESSION['id'] ?>" data-url="<?= baseUrl() ?>admin/auth" class="btn btn-dark keluar">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Keluar
+                    </a>
                 </ul>
             </div>
         </div>
@@ -118,7 +123,7 @@ $datas = mysqli_query($conn, $query);
                         <td><?= $data['tanggal'] ?></td>
                         <td><?= $data['keterangan'] ?></td>
                         <td>
-                            <a href="edit.php?id=<?= $data['id_transaksi'] ?>" class="badge text-bg-success mr-2">
+                            <a href="ubah.php?id=<?= $data['id_transaksi'] ?>" class="badge text-bg-success mr-2">
                                 <i class="fas fa-edit"></i>
                                 Ubah
                             </a>
@@ -167,6 +172,25 @@ $datas = mysqli_query($conn, $query);
                         location.href = `hapus.php?id=${data_id}`
                     }
                 })
+            })
+        })
+
+        const keluar = document.querySelector('.keluar');
+        keluar.addEventListener('click', () => {
+            const dataid = keluar.dataset.id
+            const data_base_url = keluar.dataset.url;
+            Swal.fire({
+                icon: 'warning',
+                title: 'Apakah anda yakin ingin keluar',
+                showCancelButton: true,
+                confirmButtonColor: '#d9534f',
+                cancelButtonColor: '#5cb85c',
+                confirmButtonText: `Ya`,
+                cancelButtonText: `Tidak`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.href = `${data_base_url}/keluar.php?id=${dataid}`
+                }
             })
         })
     </script>

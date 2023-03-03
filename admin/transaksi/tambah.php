@@ -45,6 +45,9 @@ if (isset($_POST['transaksi'])) {
 
     <!-- Memanggil FontAwesome V.6.3.0 -->
     <link rel="stylesheet" href="<?= baseUrl() ?>assets/vendor/fontawesome/css/all.min.css">
+
+    <!-- Memanggil Sweetalert -->
+    <link rel="stylesheet" href="<?= baseUrl(); ?>assets/vendor/sweetalert/css/sweetalert2.min.css">
 </head>
 
 <body>
@@ -84,6 +87,11 @@ if (isset($_POST['transaksi'])) {
                     <a href="<?= baseUrl() ?>admin/pembayaran" class="nav-link">
                         <i class="fa-solid fa-cart-shopping me-1"></i>
                         Pembayaran
+                    </a>
+
+                    <a href="#" data-id="<?= $_SESSION['id'] ?>" data-url="<?= baseUrl() ?>admin/auth" class="btn btn-dark keluar">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Keluar
                     </a>
                 </ul>
             </div>
@@ -167,6 +175,30 @@ if (isset($_POST['transaksi'])) {
 
     <!-- Memanggil JS Bootstrap V.5.3.0 -->
     <script src="<?= baseUrl() ?>assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <!-- Memanggil JS Sweetalert -->
+    <script src="<?= baseUrl(); ?>assets/vendor/sweetalert/js/sweetalert2.all.min.js"></script>
+
+    <script>
+        const keluar = document.querySelector('.keluar');
+        keluar.addEventListener('click', () => {
+            const dataid = keluar.dataset.id
+            const data_base_url = keluar.dataset.url;
+            Swal.fire({
+                icon: 'warning',
+                title: 'Apakah anda yakin ingin keluar',
+                showCancelButton: true,
+                confirmButtonColor: '#d9534f',
+                cancelButtonColor: '#5cb85c',
+                confirmButtonText: `Ya`,
+                cancelButtonText: `Tidak`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.href = `${data_base_url}/keluar.php?id=${dataid}`
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>
