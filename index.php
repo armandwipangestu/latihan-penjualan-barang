@@ -1,3 +1,19 @@
+<?php
+
+session_start();
+
+if (isset($_SESSION['login'])) {
+    header("Location: admin/index.php");
+}
+
+require_once 'function/functions.php';
+
+if (isset($_POST['login'])) {
+    $login = login($_POST);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +40,13 @@
                 <i class="fa fa-boxes"></i>
                 <h4 class="pt-3 mb-4">Masuk Penjualan Barang</h4>
             </div>
+
+            <?php if (isset($login['error'])) : ?>
+                <div class="text-center mt-4 text-danger mb-4 p-1">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span><?= $login['pesan']; ?></span>
+                </div>
+            <?php endif; ?>
 
             <form class="rounded pt-2" method="post" action="">
 
