@@ -110,5 +110,5 @@ function hapusTransaksi($id)
 
 function baseUrl()
 {
-    return "http://" . $_SERVER['HTTP_HOST'] . '/Latihan-Penjualan-Barang/';
+    return "http://" . $_SERVER['HTTP_HOST'] . '/latihan-penjualan-barang/';
 }

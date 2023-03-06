@@ -26,14 +26,14 @@ if (isset($_POST['ubah_transaksi'])) {
         echo "
             <script>
                 alert('Transaksi berhasil diubah');
-                document.location.href = 'edit.php?id=" . $_GET["id"] . "';
+                document.location.href = 'ubah.php?id=" . $_GET["id"] . "';
             </script>
         ";
     } else {
         echo "
             <script>
                 alert('Transaksi gagal diubah');
-                document.location.href = 'edit.php?id=" . $_GET["id"] . "';
+                document.location.href = 'ubah.php?id=" . $_GET["id"] . "';
             </script>
         ";
     }
